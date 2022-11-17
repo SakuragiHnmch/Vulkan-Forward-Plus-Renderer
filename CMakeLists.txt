@@ -8,8 +8,10 @@ set(EXTERNAL "third_party")
 
 include_directories("${EXTERNAL}/include")
 
+add_definitions(-DONE_QUEUE=1)
+
 # Configure GLFW
-set(GLFW_ROOT_DIR "${EXTERNAL}/glfw-3.2.1")
+set(GLFW_ROOT_DIR "${EXTERNAL}/glfw-3.3.6")
 #set(GLFW_ROOT_DIR "${EXTERNAL}/glfw")
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)

@@ -962,10 +962,9 @@ void _VulkanRenderer_Impl::createGraphicsPipelines()
 			depth_pipeline_info.basePipelineIndex = -1; // Optional
 			depth_pipeline_info.flags = VK_PIPELINE_CREATE_DERIVATIVE_BIT;
 
-			depth_pipeline = VRaii<vk::Pipeline>(
-				device.createGraphicsPipeline(vk::PipelineCache(), depth_pipeline_info, nullptr),
-				raii_pipeline_deleter
-				);
+            auto p = device.createGraphicsPipeline(vk::PipelineCache(), depth_pipeline_info, nullptr);
+
+            depth_pipeline = VRaii<vk::Pipeline>(p.value, raii_pipeline_deleter);
 		}
 	}
 }
@@ -1148,11 +1147,11 @@ void _VulkanRenderer_Impl::createDescriptorPool()
 	std::array<VkDescriptorPoolSize, 3> pool_sizes = {};
 	//std::array<VkDescriptorPoolSize, 2> pool_sizes = {};
 	pool_sizes[0].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-	pool_sizes[0].descriptorCount = 100; // transform buffer & light buffer & camera buffer & light buffer in compute pipeline
+	pool_sizes[0].descriptorCount = 1000; // transform buffer & light buffer & camera buffer & light buffer in compute pipeline
 	pool_sizes[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-	pool_sizes[1].descriptorCount = 100; // sampler for color map and normal map and depth map from depth prepass... and so many from scene materials
+	pool_sizes[1].descriptorCount = 1000; // sampler for color map and normal map and depth map from depth prepass... and so many from scene materials
 	pool_sizes[2].type = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
-	pool_sizes[2].descriptorCount = 3; // light visiblity buffer in graphics pipeline and compute pipeline
+	pool_sizes[2].descriptorCount = 30; // light visiblity buffer in graphics pipeline and compute pipeline
 
 	VkDescriptorPoolCreateInfo pool_info = {};
 	pool_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;

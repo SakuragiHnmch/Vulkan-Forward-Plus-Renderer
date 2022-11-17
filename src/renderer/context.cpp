@@ -14,17 +14,18 @@
 // if not debugging
 const bool ENABLE_VALIDATION_LAYERS = false;
 #else
-const bool ENABLE_VALIDATION_LAYERS = true;
+const bool ENABLE_VALIDATION_LAYERS = false;
 #endif
 
 // #define ONE_QUEUE // Force one queue for everything
 
 const std::vector<const char*> VALIDATION_LAYERS = {
-	"VK_LAYER_LUNARG_standard_validation"
+	"VK_LAYER_KHRONOS_validation"
 };
 
 const std::vector<const char*> DEVICE_EXTENSIONS = {
-	VK_KHR_SWAPCHAIN_EXTENSION_NAME
+	VK_KHR_SWAPCHAIN_EXTENSION_NAME,
+    "VK_KHR_portability_subset"
 };
 
 VContext::VContext(GLFWwindow* window)
@@ -227,9 +228,13 @@ void VContext::createInstance()
 	VkInstanceCreateInfo instance_info = {}; // not optional
 	instance_info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
 	instance_info.pApplicationInfo = &app_info;
+    instance_info.flags = VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR;
 
 	// Getting Vulkan instance extensions required by GLFW
 	auto glfwExtensions = getRequiredExtensions();
+    glfwExtensions.push_back("VK_KHR_portability_enumeration");
+    glfwExtensions.push_back("VK_KHR_get_physical_device_properties2");
+    glfwExtensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
 
 	// Getting Vulkan supported extensions
 	uint32_t extensionCount = 0;

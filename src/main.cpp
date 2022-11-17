@@ -134,12 +134,24 @@ TestSceneConfiguration rungholt_20000_lights
 	glm::quat{ 0.883192122f, -0.292658001f, 0.347898334f, 0.115281112f }   // camera rotation
 };
 
+TestSceneConfiguration vokselia_spawn_1000_small_lights
+{
+    util::getContentPath("vokselia_spawn/vokselia_spawn.obj"),  //model_file
+    1.0f,  // scale
+    glm::vec3{ -15, -5, -5 },  // min_light_pos
+    glm::vec3{ 15, 20, 5 },  // max_light_pos
+    2.0f,  // radius
+    1000,  // light num
+    glm::vec3{ 0, 0, 0 },  // camera position
+    glm::quat{ 0.717312694f, -0.00208670134f, 0.696745396f, 0.00202676491f }   // camera rotation
+};
+
 int main()
 {
 	auto result = EXIT_SUCCESS;
 
 	// change this to test different scenes
-	getGlobalTestSceneConfiguration() = sponza_full_1000_small_lights;
+	getGlobalTestSceneConfiguration() = vokselia_spawn_1000_small_lights;
 
 	try
 	{

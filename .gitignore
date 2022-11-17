@@ -1,6 +1,10 @@
 [Bb]uild/
 cmake_build/
 
+/**/build
+/**/cmake-build-debug
+/**/content
+
 ### CMake ###
 CMakeCache.txt
 CMakeFiles

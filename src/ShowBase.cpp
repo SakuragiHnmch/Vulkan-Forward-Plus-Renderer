@@ -15,8 +15,8 @@
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
 
-constexpr int WINDOW_WIDTH = 1920;
-constexpr int WINDOW_HEIGHT = 1080;
+constexpr int WINDOW_WIDTH = 1280;
+constexpr int WINDOW_HEIGHT = 720;
 constexpr bool WINDOW_RESIZABLE = true;
 constexpr float MIN_DELTA_TIME = 1.0f / 60.0f;
 

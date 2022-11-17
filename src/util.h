@@ -48,7 +48,7 @@ namespace util
 	template <typename str_t>
 	std::string getContentPath(str_t&& filename)
 	{
-		static std::string content_folder{ "../content/" };
+		static std::string content_folder{ "../../content/" };
 		return content_folder + std::forward<str_t>(filename);
 	}
 
